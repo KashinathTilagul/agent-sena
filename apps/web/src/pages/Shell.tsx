@@ -5202,7 +5202,7 @@ function CreateBotForm({
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-[14px] font-semibold text-[#F5F5F7]">
-            <Trans>New Sena Agent</Trans>
+            <Trans>New bot</Trans>
           </span>
           <span className="text-[10px] font-bold text-[#FFA447] bg-[#FF9933]/15 px-2 py-0.5 rounded-full border border-[#FF9933]/25">
             एजेंट सेना
