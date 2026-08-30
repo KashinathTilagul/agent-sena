@@ -14,6 +14,8 @@ export function WindowChrome() {
 
   return (
     <div
+      role="toolbar"
+      aria-label={t`Window controls`}
       className="app-drag flex items-center gap-[8px] py-1"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

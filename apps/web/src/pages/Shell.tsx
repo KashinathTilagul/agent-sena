@@ -102,6 +102,7 @@ import {
   useState,
 } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { AgentStoreModal } from "../components/AgentStoreModal";
 import { ArtifactFileCard } from "../components/ArtifactFileCard";
 import { AskCard } from "../components/AskCard";
 import {
@@ -129,8 +130,6 @@ import {
 } from "../lib/browser-notifications";
 import { chartViewport } from "../lib/chart-viewport";
 import { dictation } from "../lib/dictation";
-import { AgentStoreModal } from "../components/AgentStoreModal";
-import type { AgentCatalogTemplate } from "../lib/agent-catalog";
 import { localTimezone } from "../lib/local-timezone";
 import { connectMcpOauth } from "../lib/mcp-connect";
 import { copyableMessageText } from "../lib/message-text";
@@ -2226,7 +2225,9 @@ export function ShellPage() {
               data-activity-mode={activityMode ? "on" : "off"}
               onClick={toggleActivityMode}
               className={`app-no-drag flex h-7 w-7 items-center justify-center rounded-full transition ${
-                activityMode ? "bg-[#0071E3] text-white shadow-sm" : "text-[#8E8E93] hover:text-[#F5F5F7] hover:bg-white/5"
+                activityMode
+                  ? "bg-[#0071E3] text-white shadow-sm"
+                  : "text-[#8E8E93] hover:text-[#F5F5F7] hover:bg-white/5"
               }`}
             >
               <Bell
@@ -2258,7 +2259,9 @@ export function ShellPage() {
                     <span>✨</span>
                     <span>Agent Store · सेना स्टोर</span>
                   </span>
-                  <span className="text-[10px] font-bold bg-[#FF9933]/20 px-1.5 py-0.5 rounded text-[#FFA447] border border-[#FF9933]/30">40+</span>
+                  <span className="text-[10px] font-bold bg-[#FF9933]/20 px-1.5 py-0.5 rounded text-[#FFA447] border border-[#FF9933]/30">
+                    40+
+                  </span>
                 </button>
                 <button
                   type="button"
@@ -5205,7 +5208,12 @@ function CreateBotForm({
             एजेंट सेना
           </span>
         </div>
-        <button type="button" aria-label={t`Cancel new bot`} onClick={onCancel} className="text-[#8E8E93] hover:text-white transition">
+        <button
+          type="button"
+          aria-label={t`Cancel new bot`}
+          onClick={onCancel}
+          className="text-[#8E8E93] hover:text-white transition"
+        >
           <X size={16} strokeWidth={1.8} />
         </button>
       </div>
@@ -5240,11 +5248,31 @@ function CreateBotForm({
         </div>
         <div className="flex flex-wrap gap-1.5">
           {[
-            { name: "Munimji", title: "GST, Accounts & Invoicing", desc: "Automates GST reconciliation, Indian e-invoicing, TDS, and financial ledger bookkeeping." },
-            { name: "Vakil", title: "Legal & DPDP 2023 Compliance", desc: "Assists with Indian Contract Act, NDAs, Companies Act 2013, and DPDP Act 2023 compliance." },
-            { name: "Teji", title: "NSE/BSE Indian Market Analyst", desc: "Real-time analysis of Nifty 50, SEBI circulars, corporate results, and sector trends." },
-            { name: "Chanakya", title: "Strategy & Market Research", desc: "Formulates business expansion, Indian market research, and competitive intelligence." },
-            { name: "Dev", title: "UPI & Fullstack Integrations", desc: "Builds and tests code with native Razorpay, Cashfree, UPI, and Aadhaar/DigiLocker APIs." },
+            {
+              name: "Munimji",
+              title: "GST, Accounts & Invoicing",
+              desc: "Automates GST reconciliation, Indian e-invoicing, TDS, and financial ledger bookkeeping.",
+            },
+            {
+              name: "Vakil",
+              title: "Legal & DPDP 2023 Compliance",
+              desc: "Assists with Indian Contract Act, NDAs, Companies Act 2013, and DPDP Act 2023 compliance.",
+            },
+            {
+              name: "Teji",
+              title: "NSE/BSE Indian Market Analyst",
+              desc: "Real-time analysis of Nifty 50, SEBI circulars, corporate results, and sector trends.",
+            },
+            {
+              name: "Chanakya",
+              title: "Strategy & Market Research",
+              desc: "Formulates business expansion, Indian market research, and competitive intelligence.",
+            },
+            {
+              name: "Dev",
+              title: "UPI & Fullstack Integrations",
+              desc: "Builds and tests code with native Razorpay, Cashfree, UPI, and Aadhaar/DigiLocker APIs.",
+            },
           ].map((p) => (
             <button
               key={p.name}

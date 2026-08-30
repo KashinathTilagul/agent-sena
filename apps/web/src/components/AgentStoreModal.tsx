@@ -1,23 +1,12 @@
-import { useState, useMemo } from "react";
+import { ArrowRight, Check, Plus, Search, Sliders, X } from "lucide-react";
+import { useMemo, useState } from "react";
 import {
   AGENT_CATALOG,
   AGENT_CATEGORIES,
-  type AgentCategory,
   type AgentCatalogTemplate,
+  type AgentCategory,
 } from "../lib/agent-catalog";
 import { WindowChrome } from "../pages/WindowChrome";
-import {
-  Search,
-  Plus,
-  Check,
-  Sparkles,
-  Zap,
-  Bot,
-  Layers,
-  ArrowRight,
-  X,
-  Sliders,
-} from "lucide-react";
 
 interface AgentStoreModalProps {
   isOpen: boolean;
@@ -39,13 +28,12 @@ export function AgentStoreModal({
 
   const filteredAgents = useMemo(() => {
     return AGENT_CATALOG.filter((agent) => {
-      const matchesCategory =
-        selectedCategory === "all" || agent.category === selectedCategory;
+      const matchesCategory = selectedCategory === "all" || agent.category === selectedCategory;
       const q = searchQuery.toLowerCase().trim();
       const matchesSearch =
         !q ||
         agent.name.toLowerCase().includes(q) ||
-        (agent.nameRegional && agent.nameRegional.toLowerCase().includes(q)) ||
+        agent.nameRegional?.toLowerCase().includes(q) ||
         agent.title.toLowerCase().includes(q) ||
         agent.description.toLowerCase().includes(q) ||
         agent.skills.some((s) => s.toLowerCase().includes(q));
@@ -135,10 +123,7 @@ export function AgentStoreModal({
 
           {/* Search Input */}
           <div className="relative w-full sm:w-64 shrink-0">
-            <Search
-              size={14}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8E8E93]"
-            />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8E8E93]" />
             <input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -220,9 +205,7 @@ export function AgentStoreModal({
 
                 {/* Footer Action */}
                 <div className="pt-3 border-t border-white/5 flex items-center justify-between">
-                  <span className="text-[11px] text-[#636366]">
-                    Ready to deploy
-                  </span>
+                  <span className="text-[11px] text-[#636366]">Ready to deploy</span>
                   <button
                     type="button"
                     disabled={isDeploying || isDeployed}
@@ -259,7 +242,8 @@ export function AgentStoreModal({
         {/* Bottom Banner */}
         <div className="px-6 py-3.5 border-t border-white/10 bg-[#121218] flex items-center justify-between text-xs text-[#8E8E93] shrink-0">
           <div>
-            Showing <strong className="text-white">{filteredAgents.length}</strong> agents with pre-tuned system prompts & skills
+            Showing <strong className="text-white">{filteredAgents.length}</strong> agents with
+            pre-tuned system prompts & skills
           </div>
           <button
             type="button"

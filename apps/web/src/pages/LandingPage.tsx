@@ -1,7 +1,4 @@
 import { Trans } from "@lingui/react/macro";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { WindowChrome } from "./WindowChrome";
 import {
   ExternalLink,
   FileSpreadsheet,
@@ -11,13 +8,18 @@ import {
   Scale,
   Shield,
   Sparkles,
-  TrendingUp,
   Terminal,
+  TrendingUp,
 } from "lucide-react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { WindowChrome } from "./WindowChrome";
 
 export function LandingPage() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<"munimji" | "vakil" | "teji" | "chanakya" | "dev">("munimji");
+  const [activeTab, setActiveTab] = useState<"munimji" | "vakil" | "teji" | "chanakya" | "dev">(
+    "munimji",
+  );
 
   const squad = [
     {
@@ -28,10 +30,13 @@ export function LandingPage() {
       color: "#FF9933",
       avatarBg: "from-[#FF9933]/20 to-[#FF9933]/5",
       avatarBorder: "border-[#FF9933]/30",
-      description: "Automates Indian Goods & Services Tax (GST), e-invoicing, TDS schedules, and ledger reconciliation.",
+      description:
+        "Automates Indian Goods & Services Tax (GST), e-invoicing, TDS schedules, and ledger reconciliation.",
       icon: FileSpreadsheet,
-      samplePrompt: "Reconcile GSTR-2B with my purchase invoices and highlight unmatched input tax credits (ITC).",
-      sampleResponse: "Found 14 matching entries (₹1,42,800 ITC) and 2 mismatched invoices from vendor ABC Tech (₹18,400 pending). Generated reconciliation summary report.",
+      samplePrompt:
+        "Reconcile GSTR-2B with my purchase invoices and highlight unmatched input tax credits (ITC).",
+      sampleResponse:
+        "Found 14 matching entries (₹1,42,800 ITC) and 2 mismatched invoices from vendor ABC Tech (₹18,400 pending). Generated reconciliation summary report.",
     },
     {
       id: "vakil" as const,
@@ -41,10 +46,13 @@ export function LandingPage() {
       color: "#F59E0B",
       avatarBg: "from-[#F59E0B]/20 to-[#F59E0B]/5",
       avatarBorder: "border-[#F59E0B]/30",
-      description: "Indian Contract Act, Companies Act 2013, employment NDAs, and Digital Personal Data Protection (DPDP) Act 2023 compliance.",
+      description:
+        "Indian Contract Act, Companies Act 2013, employment NDAs, and Digital Personal Data Protection (DPDP) Act 2023 compliance.",
       icon: Scale,
-      samplePrompt: "Review our vendor agreement to verify compliance with Section 43A and the new DPDP Act 2023.",
-      sampleResponse: "Drafted data principal consent clauses and audit trail retention schedules conforming to DPDP 2023 rules.",
+      samplePrompt:
+        "Review our vendor agreement to verify compliance with Section 43A and the new DPDP Act 2023.",
+      sampleResponse:
+        "Drafted data principal consent clauses and audit trail retention schedules conforming to DPDP 2023 rules.",
     },
     {
       id: "teji" as const,
@@ -54,10 +62,13 @@ export function LandingPage() {
       color: "#30D158",
       avatarBg: "from-[#30D158]/20 to-[#30D158]/5",
       avatarBorder: "border-[#30D158]/30",
-      description: "Real-time analysis of Nifty 50, BankNifty, corporate earnings, SEBI circulars, and Indian macro-economic data.",
+      description:
+        "Real-time analysis of Nifty 50, BankNifty, corporate earnings, SEBI circulars, and Indian macro-economic data.",
       icon: TrendingUp,
-      samplePrompt: "Summarize today's FII/DII net flows and analyze sector rotation in IT and Banking.",
-      sampleResponse: "FIIs bought net ₹1,240 Cr; DIIs purchased ₹890 Cr. Heavy call buildup at 24,500 Nifty strike with banking outperforming.",
+      samplePrompt:
+        "Summarize today's FII/DII net flows and analyze sector rotation in IT and Banking.",
+      sampleResponse:
+        "FIIs bought net ₹1,240 Cr; DIIs purchased ₹890 Cr. Heavy call buildup at 24,500 Nifty strike with banking outperforming.",
     },
     {
       id: "chanakya" as const,
@@ -67,10 +78,13 @@ export function LandingPage() {
       color: "#AF52DE",
       avatarBg: "from-[#AF52DE]/20 to-[#AF52DE]/5",
       avatarBorder: "border-[#AF52DE]/30",
-      description: "Deep business strategy, competitive Indian market intelligence, negotiation frameworks, and growth planning.",
+      description:
+        "Deep business strategy, competitive Indian market intelligence, negotiation frameworks, and growth planning.",
       icon: Layers,
-      samplePrompt: "Design an India expansion go-to-market strategy for tier-2/3 cities targeting vernacular users.",
-      sampleResponse: "Prepared a 3-phase rollout: WhatsApp-first commerce, UPI auto-pay integration, and vernacular voice onboarding.",
+      samplePrompt:
+        "Design an India expansion go-to-market strategy for tier-2/3 cities targeting vernacular users.",
+      sampleResponse:
+        "Prepared a 3-phase rollout: WhatsApp-first commerce, UPI auto-pay integration, and vernacular voice onboarding.",
     },
     {
       id: "dev" as const,
@@ -80,10 +94,13 @@ export function LandingPage() {
       color: "#0071E3",
       avatarBg: "from-[#0071E3]/20 to-[#0071E3]/5",
       avatarBorder: "border-[#0071E3]/30",
-      description: "Builds and tests code inside local Docker sandboxes with native Razorpay, Cashfree, UPI QR, and Aadhaar/DigiLocker APIs.",
+      description:
+        "Builds and tests code inside local Docker sandboxes with native Razorpay, Cashfree, UPI QR, and Aadhaar/DigiLocker APIs.",
       icon: Terminal,
-      samplePrompt: "Write a serverless webhook handler to verify Razorpay signature and update database order status.",
-      sampleResponse: "Generated HMAC-SHA256 signature verification middleware and idempotency key handlers with unit tests.",
+      samplePrompt:
+        "Write a serverless webhook handler to verify Razorpay signature and update database order status.",
+      sampleResponse:
+        "Generated HMAC-SHA256 signature verification middleware and idempotency key handlers with unit tests.",
     },
   ];
 
@@ -121,9 +138,15 @@ export function LandingPage() {
           </div>
 
           <nav className="hidden md:flex items-center gap-6 text-[13px] text-[#8E8E93]">
-            <a href="#squad" className="hover:text-white transition">Squad (सेना)</a>
-            <a href="#features" className="hover:text-white transition">Apple Mac Experience</a>
-            <a href="#security" className="hover:text-white transition">Data Sovereignty</a>
+            <a href="#squad" className="hover:text-white transition">
+              Squad (सेना)
+            </a>
+            <a href="#features" className="hover:text-white transition">
+              Apple Mac Experience
+            </a>
+            <a href="#security" className="hover:text-white transition">
+              Data Sovereignty
+            </a>
             <a
               href="https://github.com/KashinathTilagul/agent-sena"
               target="_blank"
@@ -171,7 +194,9 @@ export function LandingPage() {
         </h1>
 
         <p className="mt-6 text-lg sm:text-xl text-[#8E8E93] max-w-2xl mx-auto leading-relaxed">
-          Meet <strong>Munimji</strong>, <strong>Vakil</strong>, <strong>Teji</strong>, <strong>Chanakya</strong>, and <strong>Dev</strong>. Persistent, autonomous teammates running isolated on your Mac or server with their own terminal, browser, and memory.
+          Meet <strong>Munimji</strong>, <strong>Vakil</strong>, <strong>Teji</strong>,{" "}
+          <strong>Chanakya</strong>, and <strong>Dev</strong>. Persistent, autonomous teammates
+          running isolated on your Mac or server with their own terminal, browser, and memory.
         </p>
 
         {/* CTAs */}
@@ -207,7 +232,9 @@ export function LandingPage() {
                   <span className="h-3 w-3 rounded-full bg-[#FF5F56]" />
                   <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
                   <span className="h-3 w-3 rounded-full bg-[#27C93F]" />
-                  <span className="ml-2 font-medium text-[#A8A8AD]">Agent Sena — Desktop Workspace</span>
+                  <span className="ml-2 font-medium text-[#A8A8AD]">
+                    Agent Sena — Desktop Workspace
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 text-[#636366]">
                   <span className="text-[#30D158] flex items-center gap-1">
@@ -228,10 +255,13 @@ export function LandingPage() {
                     </div>
                     <div className="space-y-1">
                       {squad.map((bot) => (
-                        <div
+                        <button
+                          type="button"
                           key={bot.id}
-                          className={`flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-xs transition cursor-pointer ${
-                            bot.id === activeTab ? "bg-white/10 text-white font-medium shadow-sm" : "text-[#8E8E93] hover:bg-white/5"
+                          className={`w-full text-left flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-xs transition cursor-pointer ${
+                            bot.id === activeTab
+                              ? "bg-white/10 text-white font-medium shadow-sm"
+                              : "text-[#8E8E93] hover:bg-white/5"
                           }`}
                           onClick={() => setActiveTab(bot.id)}
                         >
@@ -243,7 +273,7 @@ export function LandingPage() {
                           <span className="text-[10px] text-[#8E8E93] ml-auto">
                             {bot.nameHindi}
                           </span>
-                        </div>
+                        </button>
                       ))}
                     </div>
                   </div>
@@ -326,7 +356,8 @@ export function LandingPage() {
             Short, memorable agents built for everyday work.
           </h3>
           <p className="mt-3 text-sm text-[#8E8E93]">
-            No complex prompts needed. Each agent has its own persistent memory, specialized system prompts, and tool authorizations.
+            No complex prompts needed. Each agent has its own persistent memory, specialized system
+            prompts, and tool authorizations.
           </p>
         </div>
 
@@ -334,9 +365,10 @@ export function LandingPage() {
           {squad.map((bot) => {
             const Icon = bot.icon;
             return (
-              <div
+              <button
+                type="button"
                 key={bot.id}
-                className="mac-card p-6 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 cursor-pointer"
+                className="w-full text-left mac-card p-6 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 cursor-pointer"
                 onClick={() => setActiveTab(bot.id)}
               >
                 <div>
@@ -353,13 +385,14 @@ export function LandingPage() {
 
                   <h4 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
                     <span>{bot.name}</span>
-                    <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: bot.color }} />
+                    <span
+                      className="h-1.5 w-1.5 rounded-full"
+                      style={{ backgroundColor: bot.color }}
+                    />
                   </h4>
                   <div className="text-xs font-medium text-[#FF9933] mt-0.5">{bot.role}</div>
 
-                  <p className="mt-3 text-xs leading-relaxed text-[#8E8E93]">
-                    {bot.description}
-                  </p>
+                  <p className="mt-3 text-xs leading-relaxed text-[#8E8E93]">{bot.description}</p>
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs">
@@ -368,23 +401,25 @@ export function LandingPage() {
                     Start Chat →
                   </span>
                 </div>
-              </div>
+              </button>
             );
           })}
 
           {/* Create Custom Bot Card */}
-          <div
+          <button
+            type="button"
             onClick={() => navigate("/app")}
-            className="mac-card p-6 border-dashed border-white/15 flex flex-col items-center justify-center text-center cursor-pointer hover:border-[#FF9933]/50 transition group"
+            className="w-full text-center mac-card p-6 border-dashed border-white/15 flex flex-col items-center justify-center cursor-pointer hover:border-[#FF9933]/50 transition group"
           >
             <div className="h-12 w-12 rounded-full bg-white/5 flex items-center justify-center text-white text-xl mb-3 group-hover:scale-110 transition">
               +
             </div>
             <h4 className="text-lg font-bold text-white">Create Custom Sena Agent</h4>
             <p className="mt-1 text-xs text-[#8E8E93] max-w-[220px]">
-              Deploy specialized bots for your specific company workflows or regional language tasks.
+              Deploy specialized bots for your specific company workflows or regional language
+              tasks.
             </p>
-          </div>
+          </button>
         </div>
       </section>
 
@@ -397,7 +432,8 @@ export function LandingPage() {
             </div>
             <h3 className="text-lg font-bold text-white mb-2">Native macOS & Web App</h3>
             <p className="text-xs text-[#8E8E93] leading-relaxed">
-              Designed to feel like Apple hardware. Polished window chrome, SF Pro typography, frosted glassmorphism, and seamless keyboard shortcuts.
+              Designed to feel like Apple hardware. Polished window chrome, SF Pro typography,
+              frosted glassmorphism, and seamless keyboard shortcuts.
             </p>
           </div>
 
@@ -407,7 +443,8 @@ export function LandingPage() {
             </div>
             <h3 className="text-lg font-bold text-white mb-2">Indian Data Sovereignty</h3>
             <p className="text-xs text-[#8E8E93] leading-relaxed">
-              Your data stays on your machine. Isolated local Docker computers ensure complete compliance with India's DPDP Act 2023 without vendor lock-in.
+              Your data stays on your machine. Isolated local Docker computers ensure complete
+              compliance with India's DPDP Act 2023 without vendor lock-in.
             </p>
           </div>
 
@@ -417,7 +454,8 @@ export function LandingPage() {
             </div>
             <h3 className="text-lg font-bold text-white mb-2">Composio & 100+ App Tools</h3>
             <p className="text-xs text-[#8E8E93] leading-relaxed">
-              Equip your squad with real hands. Connect Google Drive, Gmail, Slack, GitHub, Notion, and Indian fintech APIs with 1-click OAuth.
+              Equip your squad with real hands. Connect Google Drive, Gmail, Slack, GitHub, Notion,
+              and Indian fintech APIs with 1-click OAuth.
             </p>
           </div>
         </div>

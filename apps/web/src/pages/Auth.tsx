@@ -14,7 +14,11 @@ export function AuthPage({ mode }: { mode: "in" | "up" }) {
   const [pending, setPending] = useState(false);
   const passwordFieldId = mode === "in" ? "current-password" : "new-password";
   const title =
-    mode === "in" ? <Trans>Sign in to Agent Sena</Trans> : <Trans>Create your Agent Sena squad</Trans>;
+    mode === "in" ? (
+      <Trans>Sign in to Agent Sena</Trans>
+    ) : (
+      <Trans>Create your Agent Sena squad</Trans>
+    );
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();

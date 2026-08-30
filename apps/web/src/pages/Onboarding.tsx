@@ -7,11 +7,11 @@ import {
 import { ChevronDown } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AGENT_CATALOG } from "../lib/agent-catalog";
 import { localizedProviderHint } from "../lib/localized-provider-hint";
 import type { ModelCatalogEntry } from "../lib/model-auth";
 import { rpc } from "../lib/rpc";
 import { useModelOAuthSignIn } from "../lib/use-model-oauth-signin";
-import { AGENT_CATALOG, type AgentCatalogTemplate } from "../lib/agent-catalog";
 
 export function OnboardingPage() {
   const { t } = useLingui();
@@ -32,7 +32,6 @@ export function OnboardingPage() {
   const [instructions, setInstructions] = useState("");
   const [color, setColor] = useState<string | undefined>(undefined);
   const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<"catalog" | "custom">("catalog");
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const probeRequestIdRef = useRef(0);
@@ -518,181 +517,98 @@ export function OnboardingPage() {
               </span>
             </div>
             <h1 className="text-[32px] font-bold tracking-tight text-[#F5F5F7]">
-              <Trans>Choose or Build Your First Agent</Trans>
+              <Trans>Create your first bot</Trans>
             </h1>
             <p className="mt-1 text-sm text-[#8E8E93]">
-              <Trans>Deploy a pre-tuned autonomous agent in 1 click, or design your own custom agent:</Trans>
+              <Trans>
+                Select a pre-configured Indian agent squad template or enter your own details:
+              </Trans>
             </p>
 
-            {/* Segmented Control Tabs */}
-            <div className="mt-4 mb-4 flex items-center p-1 rounded-xl bg-white/5 border border-white/10 w-fit">
-              <button
-                type="button"
-                onClick={() => setViewMode("catalog")}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${
-                  viewMode === "catalog"
-                    ? "bg-[#0071E3] text-white shadow-sm"
-                    : "text-[#8E8E93] hover:text-white"
-                }`}
-              >
-                ✨ Sena Catalog ({AGENT_CATALOG.length} Agents)
-              </button>
-              <button
-                type="button"
-                onClick={() => setViewMode("custom")}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${
-                  viewMode === "custom"
-                    ? "bg-[#0071E3] text-white shadow-sm"
-                    : "text-[#8E8E93] hover:text-white"
-                }`}
-              >
-                🛠️ Custom Builder
-              </button>
+            {/* Indian Squad Quick-Select Presets */}
+            <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              {AGENT_CATALOG.slice(0, 5).map((p) => {
+                const isSelected = selectedTemplateId === p.id || name === p.name;
+                return (
+                  <button
+                    key={p.id}
+                    type="button"
+                    onClick={() => {
+                      setName(p.name);
+                      setTitle(p.title);
+                      setDescription(p.description);
+                      setInstructions(p.instructions);
+                      setColor(p.color);
+                      setSelectedTemplateId(p.id);
+                    }}
+                    className={`p-3 rounded-xl border text-left transition ${
+                      isSelected
+                        ? "border-[#0071E3] bg-[#0071E3]/15 text-white"
+                        : "border-white/10 bg-white/5 text-[#8E8E93] hover:border-white/20 hover:text-white"
+                    }`}
+                  >
+                    <div className="font-semibold text-[13px] text-white flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full" style={{ backgroundColor: p.color }} />
+                      <span>{p.name}</span>
+                      {p.nameRegional ? (
+                        <span className="text-[10px] text-[#FFA447] font-medium">
+                          ({p.nameRegional})
+                        </span>
+                      ) : null}
+                    </div>
+                    <div className="text-[11px] text-[#A8A8AD] truncate mt-0.5">{p.title}</div>
+                  </button>
+                );
+              })}
             </div>
 
-            {viewMode === "catalog" ? (
-              <div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-[360px] overflow-y-auto pr-1 rk-scroll">
-                  {AGENT_CATALOG.slice(0, 8).map((p) => {
-                    const isSelected = selectedTemplateId === p.id || name === p.name;
-                    return (
-                      <div
-                        key={p.id}
-                        className={`p-3 rounded-xl border text-left transition flex flex-col justify-between ${
-                          isSelected
-                            ? "border-[#0071E3] bg-[#0071E3]/15 text-white"
-                            : "border-white/10 bg-white/5 text-[#8E8E93] hover:border-white/20 hover:text-white"
-                        }`}
-                      >
-                        <div>
-                          <div className="flex items-center justify-between gap-1 mb-1">
-                            <div className="font-bold text-[13px] text-white flex items-center gap-1.5">
-                              <span
-                                className="h-2.5 w-2.5 rounded-full"
-                                style={{ backgroundColor: p.color }}
-                              />
-                              <span>{p.name}</span>
-                              {p.nameRegional ? (
-                                <span className="text-[10px] text-[#FFA447] font-medium">
-                                  ({p.nameRegional})
-                                </span>
-                              ) : null}
-                            </div>
-                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-white/10 text-[#A8A8AD]">
-                              {p.categoryLabel}
-                            </span>
-                          </div>
-                          <div className="text-[11px] text-[#A8A8AD] leading-tight mb-2 line-clamp-2">
-                            {p.description}
-                          </div>
-                        </div>
-
-                        <div className="pt-2 border-t border-white/5 flex items-center justify-between">
-                          <div className="flex gap-1">
-                            {p.skills.slice(0, 2).map((s) => (
-                              <span
-                                key={s}
-                                className="text-[9px] px-1 py-0.5 rounded bg-white/5 text-[#636366]"
-                              >
-                                #{s}
-                              </span>
-                            ))}
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setName(p.name);
-                              setTitle(p.title);
-                              setDescription(p.description);
-                              setInstructions(p.instructions);
-                              setColor(p.color);
-                              setSelectedTemplateId(p.id);
-                            }}
-                            className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition ${
-                              isSelected
-                                ? "bg-[#0071E3] text-white"
-                                : "bg-white/10 hover:bg-white/20 text-[#F5F5F7]"
-                            }`}
-                          >
-                            {isSelected ? "Selected ✓" : "Select"}
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {name ? (
-                  <div className="mt-4 p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
-                    <div>
-                      <div className="text-xs text-[#8E8E93]">Ready to deploy:</div>
-                      <div className="text-sm font-bold text-white flex items-center gap-1.5 mt-0.5">
-                        <span>{name}</span>
-                        <span className="text-xs font-normal text-[#A8A8AD]">— {title}</span>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => void createBot()}
-                      className="mac-pill-btn bg-[#0071E3] hover:bg-[#0077ED] px-5 py-2 text-xs font-semibold text-white shadow-md transition"
-                    >
-                      <Trans>Deploy & Launch →</Trans>
-                    </button>
-                  </div>
-                ) : null}
-              </div>
-            ) : (
-              <div>
-                <label className="mt-2 block text-sm text-[#8E8E93]">
-                  <Trans>Name</Trans>
-                  <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder={t`Name this bot (e.g. Munimji, Code Reviewer)`}
-                    className="mt-1.5 w-full rounded-xl border border-white/10 bg-[#16161E] px-4 py-2.5 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition text-sm"
-                  />
-                </label>
-                <label className="mt-3 block text-sm text-[#8E8E93]">
-                  <Trans>Title</Trans>
-                  <input
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder={t`Role title (e.g. Tax & Invoicing Specialist)`}
-                    className="mt-1.5 w-full rounded-xl border border-white/10 bg-[#16161E] px-4 py-2.5 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition text-sm"
-                  />
-                </label>
-                <label className="mt-3 block text-sm text-[#8E8E93]">
-                  <Trans>Description</Trans>
-                  <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder={t`What this agent does and its focus areas`}
-                    rows={2}
-                    className="mt-1.5 w-full rounded-xl border border-white/10 bg-[#16161E] px-4 py-2.5 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition text-sm"
-                  />
-                </label>
-                <label className="mt-3 block text-sm text-[#8E8E93]">
-                  <Trans>Custom Instructions / System Prompt</Trans>
-                  <textarea
-                    value={instructions}
-                    onChange={(e) => setInstructions(e.target.value)}
-                    placeholder={t`Define the agent's persona, reasoning rules, or formatting preferences...`}
-                    rows={3}
-                    className="mt-1.5 w-full rounded-xl border border-white/10 bg-[#16161E] px-4 py-2.5 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition text-xs font-mono"
-                  />
-                </label>
-                <button
-                  type="button"
-                  disabled={!name.trim()}
-                  onClick={() => void createBot()}
-                  className="mt-5 mac-pill-btn bg-[#0071E3] hover:bg-[#0077ED] px-6 py-2.5 text-sm font-semibold text-white disabled:opacity-40 shadow-lg shadow-[#0071E3]/25 transition"
-                >
-                  <Trans>Deploy Custom Agent →</Trans>
-                </button>
-              </div>
-            )}
-
+            <label className="mt-6 block text-sm text-[#8E8E93]">
+              <Trans>Name</Trans>
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder={t`Name this bot (e.g. Munimji, Vakil)`}
+                className="mt-2 w-full rounded-xl border border-white/10 bg-[#16161E] px-4 py-3 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition"
+              />
+            </label>
+            <label className="mt-4 block text-sm text-[#8E8E93]">
+              <Trans>Title</Trans>
+              <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder={t`Describe what this bot does`}
+                className="mt-2 w-full rounded-xl border border-white/10 bg-[#16161E] px-4 py-3 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition"
+              />
+            </label>
+            <label className="mt-4 block text-sm text-[#8E8E93]">
+              <Trans>Description</Trans>
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder={t`What this bot is for`}
+                rows={3}
+                className="mt-2 w-full rounded-xl border border-white/10 bg-[#16161E] px-4 py-3 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition"
+              />
+            </label>
+            <label className="mt-4 block text-sm text-[#8E8E93]">
+              <Trans>Custom Instructions (Optional)</Trans>
+              <textarea
+                value={instructions}
+                onChange={(e) => setInstructions(e.target.value)}
+                placeholder={t`Custom system prompt instructions or focus areas...`}
+                rows={2}
+                className="mt-2 w-full rounded-xl border border-white/10 bg-[#16161E] px-4 py-3 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition text-xs font-mono"
+              />
+            </label>
             {error ? <p className="mt-3 text-sm text-[#FF453A]">{error}</p> : null}
+            <button
+              type="button"
+              disabled={!name.trim()}
+              onClick={() => void createBot()}
+              className="mt-6 mac-pill-btn bg-[#0071E3] hover:bg-[#0077ED] px-7 py-3 text-sm font-semibold text-white disabled:opacity-40 shadow-lg shadow-[#0071E3]/25 transition"
+            >
+              <Trans>Continue</Trans>
+            </button>
           </div>
         ) : null}
       </div>

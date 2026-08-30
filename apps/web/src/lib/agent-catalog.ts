@@ -44,7 +44,8 @@ export const AGENT_CATALOG: AgentCatalogTemplate[] = [
     category: "indian",
     categoryLabel: "Indian Squad",
     title: "GST, Invoicing & Indian Accounts",
-    description: "Automates Indian GST reconciliation (GSTR-1/2B/3B), e-invoicing, TDS deduction schedules, and Tally/Zoho ledger audits.",
+    description:
+      "Automates Indian GST reconciliation (GSTR-1/2B/3B), e-invoicing, TDS deduction schedules, and Tally/Zoho ledger audits.",
     color: "#FF9933",
     badge: "GST Expert",
     skills: ["gst-reconciliation", "e-invoicing", "tds-schedules", "tally-export"],
@@ -69,7 +70,8 @@ Tone: Professional, prudent, meticulous with numbers, always providing reference
     category: "indian",
     categoryLabel: "Indian Squad",
     title: "Legal & DPDP 2023 Compliance",
-    description: "Specialized in Indian Contract Act, Companies Act 2013, non-disclosure agreements (NDAs), and Digital Personal Data Protection Act compliance.",
+    description:
+      "Specialized in Indian Contract Act, Companies Act 2013, non-disclosure agreements (NDAs), and Digital Personal Data Protection Act compliance.",
     color: "#F59E0B",
     badge: "Legal Counsel",
     skills: ["indian-contract-act", "dpdp-2023", "companies-act", "nda-drafting"],
@@ -94,7 +96,8 @@ Always specify governing law as the Republic of India and suggest standard arbit
     category: "indian",
     categoryLabel: "Indian Squad",
     title: "NSE & BSE Market Analyst",
-    description: "Analyzes Nifty 50, BankNifty, Indian stock fundamentals, corporate quarterly results, FII/DII cash flows, and SEBI regulations.",
+    description:
+      "Analyzes Nifty 50, BankNifty, Indian stock fundamentals, corporate quarterly results, FII/DII cash flows, and SEBI regulations.",
     color: "#30D158",
     badge: "Market Scout",
     skills: ["nse-bse-analysis", "nifty-derivatives", "fii-dii-flows", "sebi-circulars"],
@@ -119,7 +122,8 @@ Tone: Objective, data-backed, analytical. Always include appropriate SEBI-aligne
     category: "indian",
     categoryLabel: "Indian Squad",
     title: "UPI & India Tech Stack Lead",
-    description: "Builds and tests fullstack code with native UPI QR, Razorpay, Cashfree, Aadhaar/DigiLocker APIs, and Account Aggregator integration.",
+    description:
+      "Builds and tests fullstack code with native UPI QR, Razorpay, Cashfree, Aadhaar/DigiLocker APIs, and Account Aggregator integration.",
     color: "#0071E3",
     badge: "India Stack",
     skills: ["upi-integration", "razorpay-webhooks", "aadhaar-digilocker", "account-aggregator"],
@@ -144,7 +148,8 @@ Tone: Clean code first, pragmatic, security-conscious, writing complete reproduc
     category: "indian",
     categoryLabel: "Indian Squad",
     title: "Strategy & Market Intelligence",
-    description: "Formulates business expansion, Indian tier-2/3 market go-to-market execution, negotiation tactics, and competitive research.",
+    description:
+      "Formulates business expansion, Indian tier-2/3 market go-to-market execution, negotiation tactics, and competitive research.",
     color: "#AF52DE",
     badge: "Master Strategist",
     skills: ["market-sizing", "pricing-strategy", "negotiation", "competitive-intel"],
@@ -170,7 +175,8 @@ Tone: Wise, structured, deeply strategic, balancing visionary expansion with dis
     category: "engineering",
     categoryLabel: "Engineering",
     title: "Fullstack Systems Architect",
-    description: "Designs scalable microservices, writes production TypeScript/Python/Go code, designs SQL schemas, and performs deep architectural reviews.",
+    description:
+      "Designs scalable microservices, writes production TypeScript/Python/Go code, designs SQL schemas, and performs deep architectural reviews.",
     color: "#6A6BF5",
     skills: ["system-design", "typescript", "clean-architecture", "database-design"],
     instructions: `You are Architect, a Principal Software Engineer and Systems Architect.
@@ -192,7 +198,8 @@ Your core principles:
     category: "engineering",
     categoryLabel: "Engineering",
     title: "Automated PR & Code Quality Reviewer",
-    description: "Identifies bugs, security vulnerabilities (OWASP), performance bottlenecks, and test coverage gaps before merging.",
+    description:
+      "Identifies bugs, security vulnerabilities (OWASP), performance bottlenecks, and test coverage gaps before merging.",
     color: "#3B82F6",
     skills: ["pr-review", "owasp-top-10", "linting", "performance-profiling"],
     instructions: `You are Code Reviewer, an exacting senior engineer reviewing pull requests.
@@ -214,7 +221,8 @@ Be constructive, concise, and provide ready-to-apply diffs for every issue ident
     category: "engineering",
     categoryLabel: "Engineering",
     title: "Infrastructure & Reliability Engineer",
-    description: "Configures Docker containers, Kubernetes manifests, GitHub Actions CI/CD pipelines, Prometheus monitoring, and Terraform.",
+    description:
+      "Configures Docker containers, Kubernetes manifests, GitHub Actions CI/CD pipelines, Prometheus monitoring, and Terraform.",
     color: "#059669",
     skills: ["docker", "github-actions", "kubernetes", "terraform", "monitoring"],
     instructions: `You are SRE DevOps, a Site Reliability and Cloud Infrastructure Specialist.
@@ -235,7 +243,8 @@ Your focus:
     category: "engineering",
     categoryLabel: "Engineering",
     title: "Application Security & Pentest Auditor",
-    description: "Scans codebases for secret leaks, injection risks, auth flaws, and dependency vulnerabilities (OWASP / CVEs).",
+    description:
+      "Scans codebases for secret leaks, injection risks, auth flaws, and dependency vulnerabilities (OWASP / CVEs).",
     color: "#DC2626",
     skills: ["appsec", "vulnerability-scan", "secret-detection", "threat-modeling"],
     instructions: `You are Sentinel, a cybersecurity engineer and penetration testing auditor.
@@ -255,7 +264,8 @@ Identify attack vectors, privilege escalation flaws, CSRF/SSRF vulnerabilities, 
     category: "finance",
     categoryLabel: "Finance",
     title: "Financial Modeling & Valuations",
-    description: "Builds DCF valuation models, calculates burn rate, SaaS unit economics (LTV/CAC, ARR, NDR), and evaluates investment decks.",
+    description:
+      "Builds DCF valuation models, calculates burn rate, SaaS unit economics (LTV/CAC, ARR, NDR), and evaluates investment decks.",
     color: "#10B981",
     skills: ["financial-modeling", "dcf-valuation", "saas-metrics", "unit-economics"],
     instructions: `You are Quant, a Wall Street and Dalal Street caliber financial analyst.
@@ -276,7 +286,8 @@ Always state underlying assumptions clearly and structure tables with precision.
     category: "finance",
     categoryLabel: "Finance",
     title: "Invoice & Expense Reconciliation",
-    description: "Parses receipts, matches purchase orders against vendor invoices, detects duplicate billings, and prepares audit reports.",
+    description:
+      "Parses receipts, matches purchase orders against vendor invoices, detects duplicate billings, and prepares audit reports.",
     color: "#0D9488",
     skills: ["ocr-parsing", "po-matching", "fraud-detection", "audit-trail"],
     instructions: `You are Ledger, an automated forensic accountant and invoice reconciliation AI.
@@ -295,7 +306,8 @@ You rigorously examine billings, detect anomalies, calculate tax adjustments, an
     category: "legal",
     categoryLabel: "Legal",
     title: "Commercial Contract Drafter",
-    description: "Drafts master services agreements (MSAs), statements of work (SOWs), IP assignment deeds, and partnership agreements.",
+    description:
+      "Drafts master services agreements (MSAs), statements of work (SOWs), IP assignment deeds, and partnership agreements.",
     color: "#D97706",
     skills: ["msa-drafting", "ip-assignment", "commercial-terms", "clause-library"],
     instructions: `You are Lex, a commercial contracts attorney AI.
@@ -313,7 +325,8 @@ Include clear definitions, payment terms, warranties, limitation of liability, a
     category: "legal",
     categoryLabel: "Legal",
     title: "Data Privacy & GDPR/DPDP Specialist",
-    description: "Audits privacy policies, cookie banners, data processing agreements (DPAs), and data subject access request (DSAR) workflows.",
+    description:
+      "Audits privacy policies, cookie banners, data processing agreements (DPAs), and data subject access request (DSAR) workflows.",
     color: "#7C3AED",
     skills: ["gdpr", "dpdp-compliance", "dpa-drafting", "privacy-by-design"],
     instructions: `You are Privacy Guard, a certified data protection officer AI.
@@ -333,7 +346,8 @@ Help organizations implement Privacy by Design, maintain Records of Processing A
     category: "marketing",
     categoryLabel: "Marketing",
     title: "Viral Acquisition & Performance Marketing",
-    description: "Develops organic viral loops, conversion rate optimization (CRO) tests, referral mechanics, and high-converting landing pages.",
+    description:
+      "Develops organic viral loops, conversion rate optimization (CRO) tests, referral mechanics, and high-converting landing pages.",
     color: "#EC4899",
     skills: ["cro", "viral-loops", "landing-pages", "ab-testing"],
     instructions: `You are Growth Hacker, a data-driven growth marketing and acquisition strategist.
@@ -353,7 +367,8 @@ Your approach:
     category: "marketing",
     categoryLabel: "Marketing",
     title: "Technical SEO & Content Authority",
-    description: "Conducts keyword research, programmatic SEO architecture, search intent analysis, schema markup, and backlink outreach.",
+    description:
+      "Conducts keyword research, programmatic SEO architecture, search intent analysis, schema markup, and backlink outreach.",
     color: "#F43F5E",
     skills: ["programmatic-seo", "keyword-clustering", "schema-org", "search-intent"],
     instructions: `You are SEO Engine, an enterprise SEO and content strategy AI.
@@ -372,7 +387,8 @@ You analyze search intent, design topical authority maps, optimize on-page Core 
     category: "research",
     categoryLabel: "Research",
     title: "Deep Academic & Market Researcher",
-    description: "Conducts exhaustive multi-source web research, synthesizes scientific papers, evaluates competitive moats, and compiles executive dossiers.",
+    description:
+      "Conducts exhaustive multi-source web research, synthesizes scientific papers, evaluates competitive moats, and compiles executive dossiers.",
     color: "#6366F1",
     skills: ["deep-web-research", "paper-synthesis", "dossier-generation", "citation-verifying"],
     instructions: `You are Atlas, a senior intelligence analyst and scientific researcher AI.
@@ -396,7 +412,8 @@ Your methodology:
     category: "operations",
     categoryLabel: "Operations",
     title: "PRD & Product Roadmap Lead",
-    description: "Writes comprehensive Product Requirement Documents (PRDs), user stories with acceptance criteria, sprint plans, and user journey maps.",
+    description:
+      "Writes comprehensive Product Requirement Documents (PRDs), user stories with acceptance criteria, sprint plans, and user journey maps.",
     color: "#8B5CF6",
     skills: ["prd-writing", "user-stories", "sprint-planning", "acceptance-criteria"],
     instructions: `You are Scrum Master, a Lead Product Manager AI.
@@ -417,7 +434,8 @@ You translate high-level product visions into razor-sharp, developer-ready speci
     category: "operations",
     categoryLabel: "Operations",
     title: "24/7 Customer Support & Triage",
-    description: "Diagnoses customer problems with empathy, writes troubleshooting guides, crafts bug escalation tickets, and resolves billing inquiries.",
+    description:
+      "Diagnoses customer problems with empathy, writes troubleshooting guides, crafts bug escalation tickets, and resolves billing inquiries.",
     color: "#0284C7",
     skills: ["customer-support", "ticket-triage", "troubleshooting", "de-escalation"],
     instructions: `You are Support Hero, an empathetic, highly skilled customer support and troubleshooting specialist AI.

@@ -42,7 +42,8 @@ export function WelcomePage() {
           </div>
           <p className="mt-4 max-w-lg text-lg text-[#8E8E93] leading-relaxed">
             <Trans>
-              Your sovereign Indian AI workforce. Autonomous agent squads built to handle real work across your desktop and web.
+              Your sovereign Indian AI workforce. Autonomous agent squads built to handle real work
+              across your desktop and web.
             </Trans>
           </p>
         </div>
