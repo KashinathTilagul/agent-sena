@@ -11,27 +11,33 @@ body,
 #root {
   height: 100%;
   margin: 0;
-  background: #050506;
-  color: #dfdfe2;
-  font-family: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  background: #08080b;
+  color: #e2e2e8;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Apple macOS Smooth Translucent Scrollbars */
 .rk-scroll::-webkit-scrollbar {
-  width: 6px;
+  width: 7px;
+  height: 7px;
 }
 .rk-scroll {
-  scrollbar-color: #2a2a2e transparent;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
   scrollbar-width: thin;
 }
 .rk-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
 .rk-scroll::-webkit-scrollbar-thumb {
-  background: #2a2a2e;
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 .rk-scroll::-webkit-scrollbar-thumb:hover {
-  background: #414147;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .app-drag {
@@ -42,13 +48,92 @@ body,
   -webkit-app-region: no-drag;
 }
 
+/* macOS Frosted Glass & Surface Classes */
+.mac-window {
+  background: rgba(18, 18, 24, 0.85);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.mac-toolbar {
+  background: rgba(26, 26, 34, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mac-sidebar {
+  background: rgba(15, 15, 20, 0.88);
+  backdrop-filter: blur(30px) saturate(190%);
+  -webkit-backdrop-filter: blur(30px) saturate(190%);
+  border-inline-end: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.mac-card {
+  background: rgba(26, 26, 35, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+}
+
+.mac-card:hover {
+  background: rgba(32, 32, 44, 0.75);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.mac-pill-btn {
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mac-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.02);
+}
+
+.mac-pill-btn:active {
+  transform: scale(0.98);
+}
+
+/* Indian Sena Badges & Gradients */
+.sena-gradient-text {
+  background: linear-gradient(135deg, #ff9933 0%, #ffffff 50%, #138808 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sena-saffron-badge {
+  background: rgba(255, 153, 51, 0.12);
+  color: #ffa447;
+  border: 1px solid rgba(255, 153, 51, 0.25);
+}
+
+.sena-green-badge {
+  background: rgba(19, 136, 8, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(19, 136, 8, 0.25);
+}
+
+.sena-tiranga-bar {
+  height: 2px;
+  background: linear-gradient(90deg, #ff9933 0%, #ffffff 50%, #138808 100%);
+  opacity: 0.85;
+}
+
 .rk-schedule-select {
   appearance: none;
-  background-color: #24242a;
+  background-color: #1e1e27;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%239A9AA0' stroke-width='2'%3E%3Cpath d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 8px center;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   padding-block: 7px;
   padding-inline: 11px 26px;
@@ -72,3 +157,4 @@ body,
     opacity: 0.3;
   }
 }
+

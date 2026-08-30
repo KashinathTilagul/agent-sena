@@ -22,6 +22,9 @@ const OnboardingPage = lazy(() =>
 const WelcomePage = lazy(() =>
   import("./pages/Welcome").then((module) => ({ default: module.WelcomePage })),
 );
+const LandingPage = lazy(() =>
+  import("./pages/LandingPage").then((module) => ({ default: module.LandingPage })),
+);
 
 export function App() {
   const session = authClient.useSession();
@@ -57,7 +60,9 @@ export function App() {
     <div className="h-full" data-rakazo-app-state="ready">
       <Suspense fallback={<div className="h-full bg-[#050506]" />}>
         <Routes>
-          <Route path="/" element={user ? <Navigate to="/app" replace /> : <WelcomePage />} />
+          <Route path="/" element={user ? <Navigate to="/app" replace /> : <LandingPage />} />
+          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/welcome" element={<WelcomePage />} />
           <Route
             path="/sign-in"
             element={user ? <Navigate to="/app" replace /> : <AuthPage key="in" mode="in" />}

@@ -2195,13 +2195,21 @@ export function ShellPage() {
         />
       ) : null}
       <aside
-        className={`absolute inset-y-0 start-0 z-40 flex w-[calc(100%-48px)] max-w-[316px] shrink-0 flex-col border-e border-[#171719] bg-[#0B0B0C] transition-transform md:static md:z-auto md:w-[316px] md:translate-x-0 ${
+        className={`absolute inset-y-0 start-0 z-40 flex w-[calc(100%-48px)] max-w-[316px] shrink-0 flex-col border-e border-[#1C1C24] bg-[#0F0F14] transition-transform md:static md:z-auto md:w-[316px] md:translate-x-0 ${
           mobileSidebarOpen ? "translate-x-0" : "-translate-x-full rtl:translate-x-full"
         }`}
       >
-        <div className="app-drag flex items-center justify-between px-[18px] pb-3 pt-4">
-          <WindowChrome />
-          <div className="relative flex items-center gap-2.5">
+        <div className="app-drag flex items-center justify-between px-[18px] pb-3 pt-4 border-b border-white/5">
+          <div className="flex items-center gap-2.5">
+            <WindowChrome />
+            <div className="flex items-center gap-1.5 font-semibold tracking-tight text-[14.5px] text-[#F5F5F7]">
+              <span>Agent Sena</span>
+              <span className="text-[10px] font-bold text-[#FFA447] bg-[#FF9933]/15 px-1.5 py-0.5 rounded-full border border-[#FF9933]/25">
+                सेना
+              </span>
+            </div>
+          </div>
+          <div className="relative flex items-center gap-2">
             <button
               type="button"
               aria-label={t`Activity`}
@@ -2209,12 +2217,12 @@ export function ShellPage() {
               title={t`Activity`}
               data-activity-mode={activityMode ? "on" : "off"}
               onClick={toggleActivityMode}
-              className={`app-no-drag flex h-7 w-7 items-center justify-center rounded-full ${
-                activityMode ? "bg-[#4C8DFF] text-white" : "text-[#7A7A80] hover:text-[#C9C9CE]"
+              className={`app-no-drag flex h-7 w-7 items-center justify-center rounded-full transition ${
+                activityMode ? "bg-[#0071E3] text-white shadow-sm" : "text-[#8E8E93] hover:text-[#F5F5F7] hover:bg-white/5"
               }`}
             >
               <Bell
-                size={15}
+                size={14}
                 strokeWidth={1.8}
                 fill={activityMode ? "currentColor" : "none"}
                 aria-hidden="true"
@@ -2223,45 +2231,50 @@ export function ShellPage() {
             <button
               type="button"
               onClick={() => setCreateMenuOpen((open) => !open)}
-              className="app-no-drag text-[21px] text-[#7A7A80] hover:text-[#C9C9CE]"
+              className="app-no-drag flex h-7 w-7 items-center justify-center rounded-full text-[18px] text-[#8E8E93] hover:text-[#F5F5F7] hover:bg-white/5 transition"
               title={t`Create`}
             >
               +
             </button>
             {createMenuOpen ? (
-              <div className="app-no-drag absolute end-0 top-full z-20 mt-2 min-w-[160px] rounded-xl border border-[#26262A] bg-[#141416] py-1 shadow-lg">
+              <div className="app-no-drag absolute end-0 top-full z-20 mt-2 min-w-[170px] rounded-xl border border-white/10 bg-[#161620] py-1.5 shadow-2xl backdrop-blur-xl">
                 <button
                   type="button"
-                  className="block w-full px-3.5 py-2 text-start text-[14px] text-[#ECECEE] hover:bg-[#1A1A1D]"
+                  className="block w-full px-3.5 py-2 text-start text-[13.5px] text-[#F5F5F7] hover:bg-white/10 transition"
                   onClick={() => {
                     setCreateMenuOpen(false);
                     setPanel("create");
                   }}
                 >
-                  <Trans>New bot</Trans>
+                  <Trans>New agent</Trans>
                 </button>
                 <button
                   type="button"
-                  className="block w-full px-3.5 py-2 text-start text-[14px] text-[#ECECEE] hover:bg-[#1A1A1D]"
+                  className="block w-full px-3.5 py-2 text-start text-[13.5px] text-[#F5F5F7] hover:bg-white/10 transition"
                   onClick={() => {
                     setCreateMenuOpen(false);
                     setPanel("create-group");
                   }}
                 >
-                  <Trans>New group</Trans>
+                  <Trans>New squad group</Trans>
                 </button>
               </div>
             ) : null}
           </div>
         </div>
-        <div className="mx-3.5 mb-3 flex items-center gap-2.5 rounded-xl border border-[#202023] bg-[#141416] px-3 py-2 text-[14px] text-[#6C6C70]">
-          <span>⌕</span>
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder={t`Search`}
-            className="w-full bg-transparent outline-none"
-          />
+        <div className="mx-3.5 my-3 flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-[#161620] px-3 py-2 text-[13px] text-[#8E8E93] focus-within:border-[#0071E3] transition">
+          <div className="flex items-center gap-2 flex-1">
+            <span className="text-[#8E8E93]">⌕</span>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={t`Search squad & tools…`}
+              className="w-full bg-transparent text-[#F5F5F7] outline-none placeholder:text-[#636366]"
+            />
+          </div>
+          <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-medium text-[#A8A8AD]">
+            ⌘K
+          </span>
         </div>
         <div className="rk-scroll flex flex-1 flex-col gap-0.5 overflow-y-auto px-2.5 pb-2.5">
           {showWorkspaceSearch ? (
@@ -5128,26 +5141,66 @@ function CreateBotForm({
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
-        <span className="text-[13.5px] text-[#85858A]">
-          <Trans>New bot</Trans>
-        </span>
-        <button type="button" aria-label={t`Cancel new bot`} onClick={onCancel}>
+        <div className="flex items-center gap-2">
+          <span className="text-[14px] font-semibold text-[#F5F5F7]">
+            <Trans>New Sena Agent</Trans>
+          </span>
+          <span className="text-[10px] font-bold text-[#FFA447] bg-[#FF9933]/15 px-2 py-0.5 rounded-full border border-[#FF9933]/25">
+            एजेंट सेना
+          </span>
+        </div>
+        <button type="button" aria-label={t`Cancel new bot`} onClick={onCancel} className="text-[#8E8E93] hover:text-white transition">
           <X size={16} strokeWidth={1.8} />
         </button>
       </div>
+
+      {/* Quick Enlist Indian Sena Agent */}
+      <div className="mt-3 mb-4 rounded-xl bg-white/5 border border-white/10 p-3">
+        <div className="text-[11.5px] font-semibold text-[#FFA447] flex items-center gap-1.5 mb-2">
+          <span>🇮🇳</span>
+          <span>Quick Enlist Squad · त्वरित चयन:</span>
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {[
+            { name: "Munimji", title: "GST, Accounts & Invoicing", desc: "Automates GST reconciliation, Indian e-invoicing, TDS, and financial ledger bookkeeping." },
+            { name: "Vakil", title: "Legal & DPDP 2023 Compliance", desc: "Assists with Indian Contract Act, NDAs, Companies Act 2013, and DPDP Act 2023 compliance." },
+            { name: "Teji", title: "NSE/BSE Indian Market Analyst", desc: "Real-time analysis of Nifty 50, SEBI circulars, corporate results, and sector trends." },
+            { name: "Chanakya", title: "Strategy & Market Research", desc: "Formulates business expansion, Indian market research, and competitive intelligence." },
+            { name: "Dev", title: "UPI & Fullstack Integrations", desc: "Builds and tests code with native Razorpay, Cashfree, UPI, and Aadhaar/DigiLocker APIs." },
+          ].map((p) => (
+            <button
+              key={p.name}
+              type="button"
+              onClick={() => {
+                setName(p.name);
+                setTitle(p.title);
+                setDescription(p.desc);
+              }}
+              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1 border ${
+                name === p.name
+                  ? "bg-[#FF9933]/20 border-[#FF9933] text-[#FFA447]"
+                  : "bg-[#181820] hover:bg-white/10 text-[#E2E2E8] border-white/10"
+              }`}
+            >
+              <span>{p.name}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {error ? (
-        <p role="alert" data-testid="create-bot-error" className="mb-3 text-[13px] text-[#C94244]">
+        <p role="alert" data-testid="create-bot-error" className="mb-3 text-[13px] text-[#FF453A]">
           {error}
         </p>
       ) : null}
-      <label className="mt-6 block text-[14px] text-[#85858A]">
+      <label className="mt-4 block text-[13px] text-[#8E8E93]">
         <Trans>Name</Trans>
         <input
           value={name}
           maxLength={BOT_NAME_MAX_LENGTH}
           onChange={(e) => setName(e.target.value)}
-          placeholder={t`Name this bot`}
-          className="mt-2 w-full rounded-[11px] border border-[#26262A] bg-transparent px-3.5 py-3 text-[#ECECEE]"
+          placeholder={t`Name this bot (e.g. Munimji, Vakil)`}
+          className="mt-1.5 w-full rounded-xl border border-white/10 bg-[#161620] px-3.5 py-2.5 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition"
         />
       </label>
       <label className="mt-4 block text-[14px] text-[#85858A]">

@@ -506,45 +506,86 @@ export function OnboardingPage() {
         ) : null}
         {step === "bot" ? (
           <div>
-            <h1 className="text-[32px] font-medium text-[#F1F1F2]">
-              <Trans>Create your first bot</Trans>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#FF9933]/15 text-[#FFA447] border border-[#FF9933]/25">
+                एजेंट सेना
+              </span>
+            </div>
+            <h1 className="text-[32px] font-bold tracking-tight text-[#F5F5F7]">
+              <Trans>Create your first Sena Agent</Trans>
             </h1>
-            <label className="mt-8 block text-sm text-[#85858A]">
+            <p className="mt-1 text-sm text-[#8E8E93]">
+              <Trans>Select a pre-configured Indian agent squad template or enter your own details:</Trans>
+            </p>
+
+            {/* Indian Squad Quick-Select Presets */}
+            <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              {[
+                { name: "Munimji", title: "GST & Accounts", desc: "Automates GST reconciliation, Indian e-invoicing, TDS, and financial ledger bookkeeping." },
+                { name: "Vakil", title: "Legal & DPDP", desc: "Assists with Indian Contract Act, NDAs, Companies Act 2013, and DPDP Act 2023 compliance." },
+                { name: "Teji", title: "NSE/BSE Markets", desc: "Real-time analysis of Nifty 50, SEBI circulars, corporate results, and sector trends." },
+                { name: "Chanakya", title: "Strategy & Growth", desc: "Formulates business expansion, Indian market research, and competitive intelligence." },
+                { name: "Dev", title: "UPI & Tech Stack", desc: "Builds and tests code with native Razorpay, Cashfree, UPI, and Aadhaar/DigiLocker APIs." },
+              ].map((p) => (
+                <button
+                  key={p.name}
+                  type="button"
+                  onClick={() => {
+                    setName(p.name);
+                    setTitle(p.title);
+                    setDescription(p.desc);
+                  }}
+                  className={`p-3 rounded-xl border text-left transition ${
+                    name === p.name
+                      ? "border-[#FF9933] bg-[#FF9933]/10 text-white"
+                      : "border-white/10 bg-white/5 text-[#8E8E93] hover:border-white/20 hover:text-white"
+                  }`}
+                >
+                  <div className="font-semibold text-[13px] text-white flex items-center gap-1.5">
+                    <span>🇮🇳</span>
+                    <span>{p.name}</span>
+                  </div>
+                  <div className="text-[11px] text-[#A8A8AD] truncate mt-0.5">{p.title}</div>
+                </button>
+              ))}
+            </div>
+
+            <label className="mt-6 block text-sm text-[#8E8E93]">
               <Trans>Name</Trans>
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder={t`Name this bot`}
-                className="mt-2 w-full rounded-[11px] border border-[#26262A] bg-transparent px-3.5 py-3 text-[#ECECEE]"
+                placeholder={t`Name this bot (e.g. Munimji, Vakil)`}
+                className="mt-2 w-full rounded-xl border border-white/10 bg-[#16161E] px-4 py-3 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition"
               />
             </label>
-            <label className="mt-4 block text-sm text-[#85858A]">
+            <label className="mt-4 block text-sm text-[#8E8E93]">
               <Trans>Title</Trans>
               <input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder={t`Describe what this bot does`}
-                className="mt-2 w-full rounded-[11px] border border-[#26262A] bg-transparent px-3.5 py-3 text-[#ECECEE]"
+                className="mt-2 w-full rounded-xl border border-white/10 bg-[#16161E] px-4 py-3 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition"
               />
             </label>
-            <label className="mt-4 block text-sm text-[#85858A]">
+            <label className="mt-4 block text-sm text-[#8E8E93]">
               <Trans>Description</Trans>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder={t`What this bot is for`}
-                rows={4}
-                className="mt-2 w-full rounded-[11px] border border-[#26262A] bg-transparent px-3.5 py-3 text-[#ECECEE]"
+                rows={3}
+                className="mt-2 w-full rounded-xl border border-white/10 bg-[#16161E] px-4 py-3 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition"
               />
             </label>
-            {error ? <p className="mt-3 text-sm text-[#E65707]">{error}</p> : null}
+            {error ? <p className="mt-3 text-sm text-[#FF453A]">{error}</p> : null}
             <button
               type="button"
               disabled={!name.trim()}
               onClick={() => void createBot()}
-              className="mt-6 rounded-[11px] bg-[#F1F1EF] px-5 py-2.5 text-[#17171A] disabled:opacity-40"
+              className="mt-6 mac-pill-btn bg-[#0071E3] hover:bg-[#0077ED] px-7 py-3 text-sm font-semibold text-white disabled:opacity-40 shadow-lg shadow-[#0071E3]/25 transition"
             >
-              <Trans>Continue</Trans>
+              <Trans>Enlist Agent →</Trans>
             </button>
           </div>
         ) : null}

@@ -14,7 +14,7 @@ export function AuthPage({ mode }: { mode: "in" | "up" }) {
   const [pending, setPending] = useState(false);
   const passwordFieldId = mode === "in" ? "current-password" : "new-password";
   const title =
-    mode === "in" ? <Trans>Sign in to Rakazo</Trans> : <Trans>Create your Rakazo</Trans>;
+    mode === "in" ? <Trans>Sign in to Agent Sena</Trans> : <Trans>Create your Agent Sena squad</Trans>;
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -25,7 +25,7 @@ export function AuthPage({ mode }: { mode: "in" | "up" }) {
         ? await authClient.signUp.email({
             email,
             password,
-            name: name || email.split("@")[0] || "User",
+            name: name || email.split("@")[0] || "Commander",
           })
         : await authClient.signIn.email({ email, password });
     setPending(false);
@@ -37,133 +37,157 @@ export function AuthPage({ mode }: { mode: "in" | "up" }) {
   }
 
   return (
-    <div className="flex min-h-full items-center justify-center bg-[#F7F7F4] px-6 py-16 text-[#1B1B1E]">
-      <form onSubmit={submit} className="flex w-[460px] flex-col items-center">
-        <div className="flex h-[74px] w-[74px] items-center justify-center gap-[11px] rounded-full bg-[#16161A]">
-          <span className="h-5 w-[9px] rounded-full bg-[#F7F7F4]" />
-          <span className="h-5 w-[9px] rounded-full bg-[#F7F7F4]" />
-        </div>
-        <h1 className="mb-[38px] mt-[30px] text-[38px] tracking-[-0.02em]">{title}</h1>
-        {mode === "up" ? (
-          <label className="mb-4 w-full text-[16px] text-[#6E6E68]">
-            <Trans>Name</Trans>
-            <input
-              id="name"
-              name="name"
-              autoComplete="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder={t`Your name`}
-              className="mt-2 w-full rounded-[13px] border border-[#E4E4DE] bg-[#F1F1ED] px-[18px] py-[17px] text-[17px] text-[#1B1B1E] outline-none"
-            />
-          </label>
-        ) : null}
-        <label className="w-full text-[16px] text-[#6E6E68]">
-          <Trans>Email</Trans>
-          <input
-            id="email"
-            name="email"
-            autoComplete="username"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder={t`Your email address`}
-            type="email"
-            required
-            className="mt-2 w-full rounded-[13px] border border-[#E4E4DE] bg-[#F1F1ED] px-[18px] py-[17px] text-[17px] text-[#1B1B1E] outline-none"
-          />
-        </label>
-        <div className="mt-4 w-full text-[16px] text-[#6E6E68]">
-          <label htmlFor={passwordFieldId}>
-            <Trans>Password</Trans>
-          </label>
-          <div className="relative mt-2">
-            <input
-              id={passwordFieldId}
-              name="password"
-              autoComplete={mode === "in" ? "current-password" : "new-password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder={t`Password`}
-              type={showPassword ? "text" : "password"}
-              required
-              minLength={8}
-              className="w-full rounded-[13px] border border-[#E4E4DE] bg-[#F1F1ED] py-[17px] pl-[18px] pr-[52px] text-[17px] text-[#1B1B1E] outline-none"
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword((shown) => !shown)}
-              aria-label={showPassword ? t`Hide password` : t`Show password`}
-              aria-pressed={showPassword}
-              className="absolute inset-y-0 right-0 flex items-center px-[18px] text-[#8C8C86] hover:text-[#1B1B1E]"
-            >
-              {showPassword ? (
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
-                  <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
-                  <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
-                  <line x1="2" y1="2" x2="22" y2="22" />
-                </svg>
-              ) : (
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-              )}
-            </button>
+    <div className="flex min-h-full items-center justify-center bg-[#08080B] px-6 py-16 text-[#F5F5F7]">
+      {/* Background Glow */}
+      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-b from-[#FF9933]/10 via-[#0071E3]/5 to-transparent rounded-full blur-[130px]" />
+      </div>
+
+      <div className="relative z-10 w-full max-w-[460px] mac-card p-9 border border-white/10 shadow-2xl bg-[#121218]/85 backdrop-blur-2xl">
+        <form onSubmit={submit} className="flex flex-col items-center">
+          {/* Agent Sena Emblem with Indian Tricolor */}
+          <div className="flex h-[68px] w-[68px] items-center justify-center gap-[6px] rounded-2xl bg-gradient-to-br from-[#1E1E28] to-[#121218] border border-white/15 shadow-lg">
+            <span className="h-6 w-2 rounded-full bg-[#FF9933] shadow-[0_0_8px_#FF9933]" />
+            <span className="h-6 w-2 rounded-full bg-white shadow-[0_0_8px_#FFFFFF]" />
+            <span className="h-6 w-2 rounded-full bg-[#138808] shadow-[0_0_8px_#138808]" />
           </div>
-        </div>
-        {error ? <p className="mt-3 w-full text-sm text-[#C94244]">{error}</p> : null}
-        <button
-          type="submit"
-          disabled={pending}
-          className="mt-3 w-full rounded-[13px] bg-[#121215] py-[18px] text-center text-[17px] font-medium text-[#FBFBF9] hover:bg-[#26262B]"
-        >
-          {pending ? (
-            <Trans>Working…</Trans>
-          ) : mode === "in" ? (
-            <Trans>Continue with email</Trans>
-          ) : (
-            <Trans>Create account</Trans>
-          )}
-        </button>
-        <p className="mt-[30px] text-[16px] text-[#8C8C86]">
-          {mode === "in" ? (
-            <>
-              <Trans>Don’t have an account?</Trans>{" "}
-              <Link to="/sign-up" className="font-medium text-[#1B1B1E]">
-                <Trans>Sign up</Trans>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Trans>Already have an account?</Trans>{" "}
-              <Link to="/sign-in" className="font-medium text-[#1B1B1E]">
-                <Trans>Sign in</Trans>
-              </Link>
-            </>
-          )}
-        </p>
-      </form>
+
+          <div className="mt-4 flex items-center gap-2">
+            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#FF9933]/15 text-[#FFA447] border border-[#FF9933]/25">
+              एजेंट सेना
+            </span>
+          </div>
+
+          <h1 className="mb-[24px] mt-[12px] text-[28px] font-bold tracking-tight text-center text-[#F5F5F7]">
+            {title}
+          </h1>
+
+          {mode === "up" ? (
+            <label className="mb-4 w-full text-[14px] text-[#8E8E93]">
+              <Trans>Name</Trans>
+              <input
+                id="name"
+                name="name"
+                autoComplete="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder={t`Your name`}
+                className="mt-1.5 w-full rounded-xl border border-white/10 bg-[#1A1A24] px-4 py-3 text-[15px] text-[#F5F5F7] outline-none focus:border-[#0071E3] transition"
+              />
+            </label>
+          ) : null}
+
+          <label className="w-full text-[14px] text-[#8E8E93]">
+            <Trans>Email</Trans>
+            <input
+              id="email"
+              name="email"
+              autoComplete="username"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder={t`Your email address`}
+              type="email"
+              required
+              className="mt-1.5 w-full rounded-xl border border-white/10 bg-[#1A1A24] px-4 py-3 text-[15px] text-[#F5F5F7] outline-none focus:border-[#0071E3] transition"
+            />
+          </label>
+
+          <div className="mt-4 w-full text-[14px] text-[#8E8E93]">
+            <label htmlFor={passwordFieldId}>
+              <Trans>Password</Trans>
+            </label>
+            <div className="relative mt-1.5">
+              <input
+                id={passwordFieldId}
+                name="password"
+                autoComplete={mode === "in" ? "current-password" : "new-password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder={t`Password`}
+                type={showPassword ? "text" : "password"}
+                required
+                minLength={8}
+                className="w-full rounded-xl border border-white/10 bg-[#1A1A24] py-3 pl-4 pr-12 text-[15px] text-[#F5F5F7] outline-none focus:border-[#0071E3] transition"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((shown) => !shown)}
+                aria-label={showPassword ? t`Hide password` : t`Show password`}
+                aria-pressed={showPassword}
+                className="absolute inset-y-0 right-0 flex items-center px-4 text-[#8E8E93] hover:text-white"
+              >
+                {showPassword ? (
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+                    <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+                    <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+                    <line x1="2" y1="2" x2="22" y2="22" />
+                  </svg>
+                ) : (
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {error ? <p className="mt-3 w-full text-xs text-[#FF453A]">{error}</p> : null}
+
+          <button
+            type="submit"
+            disabled={pending}
+            className="mt-6 w-full rounded-xl bg-[#0071E3] hover:bg-[#0077ED] py-3 text-center text-[15px] font-semibold text-white shadow-lg shadow-[#0071E3]/20 disabled:opacity-50 transition"
+          >
+            {pending ? (
+              <Trans>Working…</Trans>
+            ) : mode === "in" ? (
+              <Trans>Sign In →</Trans>
+            ) : (
+              <Trans>Create Account →</Trans>
+            )}
+          </button>
+
+          <p className="mt-6 text-[13px] text-[#8E8E93]">
+            {mode === "in" ? (
+              <>
+                <Trans>Don’t have a squad yet?</Trans>{" "}
+                <Link to="/sign-up" className="font-medium text-[#0071E3] hover:underline">
+                  <Trans>Sign up</Trans>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Trans>Already have a squad?</Trans>{" "}
+                <Link to="/sign-in" className="font-medium text-[#0071E3] hover:underline">
+                  <Trans>Sign in</Trans>
+                </Link>
+              </>
+            )}
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

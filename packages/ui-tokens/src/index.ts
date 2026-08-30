@@ -1,30 +1,37 @@
 export const tokens = {
-  page: "#050506",
-  sidebar: "#0B0B0C",
-  main: "#0D0D0E",
-  panel: "#0A0A0B",
-  hairline: "#171719",
-  hairlineStrong: "#202023",
-  surface: "#141416",
-  surface2: "#1A1A1D",
-  ink: "#ECECEE",
-  body: "#DFDFE2",
-  muted: "#85858A",
-  muted2: "#6C6C70",
-  cream: "#F1F1EF",
-  creamInk: "#1A1A1A",
-  accent: "#3EC5A8",
-  danger: "#E65707",
-  success: "#30A24B",
-  successSoft: "#4ECB71",
+  page: "#08080B",
+  sidebar: "#0F0F14",
+  main: "#111117",
+  panel: "#0D0D12",
+  hairline: "#1C1C24",
+  hairlineStrong: "#282834",
+  surface: "#16161E",
+  surface2: "#1E1E28",
+  ink: "#F5F5F7",
+  body: "#E2E2E8",
+  muted: "#8E8E93",
+  muted2: "#636366",
+  cream: "#FBFBFD",
+  creamInk: "#1D1D1F",
+  accent: "#0071E3",
+  danger: "#FF453A",
+  success: "#30D158",
+  successSoft: "#34C759",
+  saffron: "#FF9933",
+  saffronLight: "#FFAA4D",
+  indianGreen: "#138808",
+  ashokaNavy: "#000080",
+  gold: "#F59E0B",
 } as const;
 
 export const botColors = [
-  "#3EC5A8",
-  "#F5A03C",
-  "#6A6BF5",
-  "#9B5CF6",
-  "#3B82F6",
-  "#F2622A",
-  "#D9508A",
+  "#FF9933", // Saffron
+  "#138808", // Indian Green
+  "#0071E3", // Apple Blue
+  "#F59E0B", // Gold / Marigold
+  "#6A6BF5", // Indigo
+  "#9B5CF6", // Purple
+  "#3EC5A8", // Teal
+  "#F2622A", // Sunset
+  "#D9508A", // Rose
 ] as const;
