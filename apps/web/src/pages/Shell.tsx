@@ -2281,7 +2281,7 @@ export function ShellPage() {
                     setPanel("create-group");
                   }}
                 >
-                  <Trans>New squad group</Trans>
+                  <Trans>New group</Trans>
                 </button>
               </div>
             ) : null}
