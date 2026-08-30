@@ -129,6 +129,8 @@ import {
 } from "../lib/browser-notifications";
 import { chartViewport } from "../lib/chart-viewport";
 import { dictation } from "../lib/dictation";
+import { AgentStoreModal } from "../components/AgentStoreModal";
+import type { AgentCatalogTemplate } from "../lib/agent-catalog";
 import { localTimezone } from "../lib/local-timezone";
 import { connectMcpOauth } from "../lib/mcp-connect";
 import { copyableMessageText } from "../lib/message-text";
@@ -297,6 +299,7 @@ export function ShellPage() {
   const [attachmentNotice, setAttachmentNotice] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [panel, setPanel] = useState<Panel>(null);
+  const [storeOpen, setStoreOpen] = useState(false);
   const [peerMessagesOpen, setPeerMessagesOpen] = useState(false);
   const [peerMessagesFocusId, setPeerMessagesFocusId] = useState<string | null>(null);
   const [routines, setRoutines] = useState<Routine[]>([]);
@@ -2004,10 +2007,15 @@ export function ShellPage() {
     name: string;
     title: string;
     description: string;
+    instructions?: string;
+    color?: string;
     computerMode: ComputerMode;
   }) {
+    const profile = normalizeCreateBotProfile(input);
     const bot = await rpc.bots.create({
-      ...normalizeCreateBotProfile(input),
+      ...profile,
+      ...(input.instructions ? { instructions: input.instructions } : {}),
+      ...(input.color ? { color: input.color } : {}),
       notifyOnFinish: true,
       computerMode: input.computerMode,
     });
@@ -2237,16 +2245,30 @@ export function ShellPage() {
               +
             </button>
             {createMenuOpen ? (
-              <div className="app-no-drag absolute end-0 top-full z-20 mt-2 min-w-[170px] rounded-xl border border-white/10 bg-[#161620] py-1.5 shadow-2xl backdrop-blur-xl">
+              <div className="app-no-drag absolute end-0 top-full z-20 mt-2 min-w-[200px] rounded-xl border border-white/10 bg-[#161620] py-1.5 shadow-2xl backdrop-blur-xl">
                 <button
                   type="button"
-                  className="block w-full px-3.5 py-2 text-start text-[13.5px] text-[#F5F5F7] hover:bg-white/10 transition"
+                  className="flex items-center justify-between w-full px-3.5 py-2 text-start text-[13px] font-semibold text-[#FFA447] hover:bg-white/10 transition border-b border-white/5"
+                  onClick={() => {
+                    setCreateMenuOpen(false);
+                    setStoreOpen(true);
+                  }}
+                >
+                  <span className="flex items-center gap-2">
+                    <span>✨</span>
+                    <span>Agent Store · सेना स्टोर</span>
+                  </span>
+                  <span className="text-[10px] font-bold bg-[#FF9933]/20 px-1.5 py-0.5 rounded text-[#FFA447] border border-[#FF9933]/30">40+</span>
+                </button>
+                <button
+                  type="button"
+                  className="block w-full px-3.5 py-2 text-start text-[13px] text-[#F5F5F7] hover:bg-white/10 transition"
                   onClick={() => {
                     setCreateMenuOpen(false);
                     setPanel("create");
                   }}
                 >
-                  <Trans>New agent</Trans>
+                  <Trans>Custom Agent Builder</Trans>
                 </button>
                 <button
                   type="button"
@@ -3063,6 +3085,10 @@ export function ShellPage() {
               <CreateBotForm
                 onCancel={() => setPanel(null)}
                 onCreate={(input) => createBot(input)}
+                onOpenStore={() => {
+                  setPanel(null);
+                  setStoreOpen(true);
+                }}
               />
             ) : null}
             {panel === "settings" && active ? (
@@ -3662,7 +3688,27 @@ export function ShellPage() {
   );
 
   return (
-    <AvatarStyleProvider value={bootstrapMe?.avatarStyle ?? "robot"}>{shell}</AvatarStyleProvider>
+    <AvatarStyleProvider value={bootstrapMe?.avatarStyle ?? "robot"}>
+      {shell}
+      <AgentStoreModal
+        isOpen={storeOpen}
+        onClose={() => setStoreOpen(false)}
+        onDeploy={async (template) => {
+          await createBot({
+            name: template.name,
+            title: template.title,
+            description: template.description,
+            instructions: template.instructions,
+            color: template.color,
+            computerMode: "team",
+          });
+        }}
+        onOpenCustomBuilder={() => {
+          setStoreOpen(false);
+          setPanel("create");
+        }}
+      />
+    </AvatarStyleProvider>
   );
 }
 
@@ -5108,19 +5154,23 @@ function ComputerModePicker({
 function CreateBotForm({
   onCreate,
   onCancel,
+  onOpenStore,
 }: {
   onCreate: (input: {
     name: string;
     title: string;
     description: string;
+    instructions?: string;
     computerMode: ComputerMode;
   }) => Promise<void>;
   onCancel: () => void;
+  onOpenStore?: () => void;
 }) {
   const { t } = useLingui();
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [instructions, setInstructions] = useState("");
   const [computerMode, setComputerMode] = useState<ComputerMode>("team");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -5130,7 +5180,13 @@ function CreateBotForm({
     setError(null);
     setSubmitting(true);
     try {
-      await onCreate({ name, title, description, computerMode });
+      await onCreate({
+        name,
+        title,
+        description,
+        instructions: instructions.trim() || undefined,
+        computerMode,
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : t`Could not create bot`);
     } finally {
@@ -5154,8 +5210,30 @@ function CreateBotForm({
         </button>
       </div>
 
+      {/* Agent Store Quick Banner */}
+      {onOpenStore ? (
+        <div className="mb-4 p-3 rounded-xl bg-gradient-to-r from-[#0071E3]/20 via-[#AF52DE]/15 to-[#FF9933]/15 border border-white/10 flex items-center justify-between gap-2">
+          <div>
+            <div className="text-[12.5px] font-bold text-white flex items-center gap-1.5">
+              <span>✨</span>
+              <span>Agent Sena Store (सेना स्टोर)</span>
+            </div>
+            <div className="text-[11px] text-[#A8A8AD] mt-0.5">
+              40+ pre-tuned agents across Law, Finance, Coding, Strategy & Growth.
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onOpenStore}
+            className="mac-pill-btn shrink-0 bg-[#0071E3] hover:bg-[#0077ED] text-white px-3 py-1.5 text-xs font-semibold shadow-sm transition"
+          >
+            Explore Catalog →
+          </button>
+        </div>
+      ) : null}
+
       {/* Quick Enlist Indian Sena Agent */}
-      <div className="mt-3 mb-4 rounded-xl bg-white/5 border border-white/10 p-3">
+      <div className="mt-2 mb-4 rounded-xl bg-white/5 border border-white/10 p-3">
         <div className="text-[11.5px] font-semibold text-[#FFA447] flex items-center gap-1.5 mb-2">
           <span>🇮🇳</span>
           <span>Quick Enlist Squad · त्वरित चयन:</span>
@@ -5220,8 +5298,18 @@ function CreateBotForm({
           maxLength={BOT_DESCRIPTION_MAX_LENGTH}
           onChange={(e) => setDescription(e.target.value)}
           placeholder={t`What this bot is for`}
-          rows={4}
+          rows={3}
           className="mt-2 w-full rounded-[11px] border border-[#26262A] bg-transparent px-3.5 py-3 text-[#ECECEE]"
+        />
+      </label>
+      <label className="mt-4 block text-[13px] text-[#8E8E93]">
+        <Trans>Custom Instructions & System Prompt (Optional)</Trans>
+        <textarea
+          value={instructions}
+          onChange={(e) => setInstructions(e.target.value)}
+          placeholder={t`Define the agent's persona, specialized knowledge, reasoning rules, or formatting preferences...`}
+          rows={3}
+          className="mt-2 w-full rounded-xl border border-white/10 bg-[#161620] px-3.5 py-2.5 text-[#F5F5F7] outline-none focus:border-[#0071E3] transition text-xs font-mono"
         />
       </label>
       <ComputerModePicker value={computerMode} onChange={setComputerMode} />
