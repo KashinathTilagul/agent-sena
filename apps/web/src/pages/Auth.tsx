@@ -167,9 +167,9 @@ export function AuthPage({ mode }: { mode: "in" | "up" }) {
             {pending ? (
               <Trans>Working…</Trans>
             ) : mode === "in" ? (
-              <Trans>Sign In →</Trans>
+              <Trans>Continue with email</Trans>
             ) : (
-              <Trans>Create Account →</Trans>
+              <Trans>Create account</Trans>
             )}
           </button>
 

@@ -2271,7 +2271,7 @@ export function ShellPage() {
                     setPanel("create");
                   }}
                 >
-                  <Trans>Custom Agent Builder</Trans>
+                  <Trans>New bot</Trans>
                 </button>
                 <button
                   type="button"
